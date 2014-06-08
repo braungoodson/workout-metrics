@@ -1,0 +1,1 @@
+select a.*, max(a.sweight) as maxSetRep from sets a, workouts b where a.wid = b.wid group by sname, wid;

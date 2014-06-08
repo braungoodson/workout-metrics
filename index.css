@@ -1,0 +1,48 @@
+.input-group {
+	margin-bottom:15px;
+}
+
+.bg-info {
+	padding:15px;
+}
+
+.hydrate {
+	color:#555;
+}
+
+.escape-buffer {
+	margin-bottom:0px;
+}
+
+.btn-busy {
+	width:70px;
+	padding-bottom:0px;
+	padding-top:4px;
+}
+
+.glyphicon-busy {
+	font-size:23px;
+	-webkit-animation: spin .5s ease 0s infinite;
+}
+
+@-webkit-keyframes spin {
+	from {
+		-webkit-transform: rotate(0deg);
+	} to {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+canvas {
+	width:100%;
+}
+
+.carousel-control.left {
+	background-image:linear-gradient(to right,rgba(255, 255, 255, 0.5) 0,rgba(0,0,0,.0001) 100%);
+}
+
+.carousel-control.right {
+	background-image:linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(255, 255, 255, 0.5) 100%);
+}
+
+.glyphicon-chevron-left.glyphicon:hover {}
