@@ -40,7 +40,8 @@ server.get('/workouts',function(q,r){
 });
 
 server.get('/workouts/:wid',function(q,r){
-
+  var wid = q.params.wid;
+  resolveQueryAndRequest('select * from workouts where wid = '+wid,r);
 });
 
 server.post('/workouts',function(q,r){
