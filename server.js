@@ -57,11 +57,6 @@ server.get('/sets/:sid',function(q,r){
   resolveQueryAndRequest('select * from sets where sid = '+sid,r);
 });
 
-server.get('/sets/:wid',function(q,r){
-  var wid = q.params.wid;
-  resolveQueryAndRequest('select * from sets where wid = '+wid,r);
-});
-
 server.post('/sets',function(q,r){
 
 });
