@@ -4,7 +4,7 @@ var express = require('express'),
 	atob = require('atob'),
   server = express(),
   maria = new mariasql(),
-  port = process.env.PORT || 30000,
+  port = process.env.PORT || 3000,
   staticRoot = __dirname;
 
 
