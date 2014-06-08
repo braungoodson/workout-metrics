@@ -14,20 +14,24 @@ server.listen(port);
 
 console.log('connecting to maria');
 
-maria.connect({
-  host: 'localhost',
-  user: 'wmcrud',
-  password: 'wmcrud',
-  db: 'workout_metrics'
-});
+maria
+  .connect({
+    host: 'localhost',
+    user: 'wmcrud',
+    password: 'wmcrud',
+    db: 'workout_metrics'
+  })
+;
 
-maria.on('connect', function() {
- console.log('connected to maria');
-}).on('error', function(e) {
- console.log('error: maria: ' + e);
-}).on('close', function(c) {
- console.log('warning: maria: closed: ' + c);
-});
+maria
+  .on('connect', function() {
+   console.log('connected to maria');
+  }).on('error', function(e) {
+   console.log('error: maria: ' + e);
+  }).on('close', function(c) {
+   console.log('warning: maria: closed: ' + c);
+  })
+;
 
 console.log('server up on port '+port);
 
