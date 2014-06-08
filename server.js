@@ -48,31 +48,21 @@ server.post('/workouts',function(q,r){
 
 });
 
-server.get('/workouts/:wid/sets',function(q,r){
-
-});
-
-server.get('/workouts/:wid/sets/names',function(q,r){
-
-});
-
 server.get('/sets',function(q,r){
   resolveQueryAndRequest('select * from sets',r);
 });
 
-server.get('/sets/:wid',function(q,r){
+server.get('/sets/:sid',function(q,r){
+  var sid = q.params.sid;
+  resolveQueryAndRequest('select * from sets where sid = '+sid,r);
+});
 
+server.get('/sets/:wid',function(q,r){
+  var wid = q.params.wid;
+  resolveQueryAndRequest('select * from sets where wid = '+wid,r);
 });
 
 server.post('/sets',function(q,r){
-
-});
-
-server.get('/sets/:wid',function(q,r){
-
-});
-
-server.get('/sets/names/:name',function(q,r){
 
 });
 
