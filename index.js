@@ -189,7 +189,7 @@ function SetsMetricsController ($scope,$http,SetsService) {
 		for (var i in labels) {
 			for (var j in s) {
 				if (labels[i] == s[i].name) {
-					if (labelExists(labels[i]) {
+					if (labelExists(labels[i])) {
 						
 					}
 				}
