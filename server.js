@@ -36,9 +36,49 @@ maria
 console.log('server up on port '+port);
 
 server.get('/workouts',function(q,r){
+  resolveQueryAndRequest('select * from workouts',r);
+});
+
+server.get('/workouts/:wid',function(q,r){
+
+});
+
+server.post('/workouts',function(q,r){
+
+});
+
+server.get('/workouts/:wid/sets',function(q,r){
+
+});
+
+server.get('/workouts/:wid/sets/names',function(q,r){
+
+});
+
+server.get('/sets',function(q,r){
+  resolveQueryAndRequest('select * from sets',r);
+});
+
+server.get('/sets/:wid',function(q,r){
+
+});
+
+server.post('/sets',function(q,r){
+
+});
+
+server.get('/sets/:wid',function(q,r){
+
+});
+
+server.get('/sets/names/:name',function(q,r){
+
+});
+
+function resolveQueryAndRequest (q,r) {
   var results = [];
   maria
-    .query('select * from workouts')
+    .query(q)
     .on('result',onResultHandler)
     .on('end',onEndHandler)
   ;
@@ -63,40 +103,4 @@ server.get('/workouts',function(q,r){
   	console.log(end);
 	r.send(results);
   }
-});
-
-server.get('/workouts/:wid',function(q,r){
-
-});
-
-server.post('/workouts',function(q,r){
-
-});
-
-server.get('/workouts/:wid/sets',function(q,r){
-
-});
-
-server.get('/workouts/:wid/sets/names',function(q,r){
-
-});
-
-server.get('/sets',function(q,r){
-
-});
-
-server.get('/sets/:wid',function(q,r){
-
-});
-
-server.post('/sets',function(q,r){
-
-});
-
-server.get('/sets/:wid',function(q,r){
-
-});
-
-server.get('/sets/names/:name',function(q,r){
-
-});
+}
