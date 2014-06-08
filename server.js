@@ -32,7 +32,30 @@ maria.on('connect', function() {
 console.log('server up on port '+port);
 
 server.get('/workouts',function(q,r){
-
+  maria
+    .query('select * from workouts')
+    .on('result',onResultHandler)
+    .on('end',onEndHandler)
+  ;
+  function onResultHandler (result) {
+    result
+      .on('row',onRowHandler)
+      .on('error',onErrorHandler)
+      .on('end',onEndHandler)
+    ;
+    function onRowHandler (row) {
+    	console.log(row);
+    }
+    function onErrorHandler (error) {
+    	console.log(error);
+    }
+    function onEndHandler (end) {
+    	console.log(end);
+    }
+  }
+  function onEndHandler (end) {
+  	console.log(end);
+  }
 });
 
 server.get('/workouts/:wid',function(q,r){
