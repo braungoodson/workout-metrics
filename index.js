@@ -62,7 +62,7 @@ function WorkoutsReadController ($scope,$http) {
 	$scope.workouts = [];
 	$scope.busy = true;
 	$http.get('/workouts').success(function(data){
-		$scope.workouts = data.workouts;
+		$scope.workouts = data;
 		$scope.busy = false;
 	}).error(function(){
 		throw new Error(arguments);
