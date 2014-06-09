@@ -4,7 +4,7 @@ app.config(['$routeProvider',Router]);
 app.service('WorkoutsService',['$q','$http',WorkoutsService]);
 app.service('SetsService',['$q','$http',SetsService]);
 app.controller('WorkoutsCreateController',['$scope','$http','$location',WorkoutsCreateController]);
-app.controller('WorkoutsReadController',['$scope','$http',WorkoutsReadController]);
+app.controller('WorkoutsReadController',['$scope','$http','WorkoutsService',WorkoutsReadController]);
 app.controller('WorkoutsMetricsController',['$scope','$http','WorkoutsService',WorkoutsMetricsController]);
 app.controller('SetsCreateController',['$scope','$location','$http',SetsCreateController]);
 app.controller('SetsReadController',['$scope','$http',SetsReadController]);
@@ -57,16 +57,23 @@ function WorkoutsMetricsController ($scope,$http,WorkoutsService) {
 	console.log('end');
 }
 
-function WorkoutsReadController ($scope,$http) {
+function WorkoutsReadController ($scope,$http,WorkoutsService) {
 	$scope.busy = false;
 	$scope.workouts = [];
 	$scope.busy = true;
-	$http.get('/workouts').success(function(data){
-		$scope.workouts = data.workouts;
-		$scope.busy = false;
-	}).error(function(){
-		throw new Error(arguments);
-	});
+	WorkoutsService
+		.getWorkouts()
+		.then(onResolve,onReject,onNotify)
+	;
+	function onNotify (notification) {
+		console.log('n',notification);
+	}
+	function onReject (rejection) {
+		throw new Error(rejection);
+	}
+	function onResolve (resolution) {
+		$scope.workouts = resolution.workouts;
+	}
 }
 
 function WorkoutsCreateController ($scope,$http,$location) {
