@@ -37,11 +37,12 @@ function WorkoutsService ($q,$http) {
 }
 
 function WorkoutsMetricsController ($scope,$http,WorkoutsService) {
-	$scope.busy = false;
 	$scope.workouts = [];
 	$scope.sets = [];
-	var workoutsPromise = WorkoutsService.getWorkouts();
-	workoutsPromise.then(onResolve,onReject,onNotify);
+	WorkoutsService
+		.getWorkouts()
+		.then(onResolve,onReject,onNotify)
+	;
 	function onNotify (notification) {
 		console.log('n',notification);
 	}
@@ -50,17 +51,11 @@ function WorkoutsMetricsController ($scope,$http,WorkoutsService) {
 	}
 	function onResolve (resolution) {
 		$scope.workouts = resolution.workouts;
-		var w = $scope.workouts;
-		for (var i in w) {
-		}
 	}
-	console.log('end');
 }
 
 function WorkoutsReadController ($scope,$http,WorkoutsService) {
-	$scope.busy = false;
 	$scope.workouts = [];
-	$scope.busy = true;
 	WorkoutsService
 		.getWorkouts()
 		.then(onResolve,onReject,onNotify)

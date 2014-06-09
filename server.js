@@ -1,10 +1,10 @@
 var express = require('express'),
-	mariasql = require('mariasql'),
-	bodyParser = require('body-parser'),
-	atob = require('atob'),
+  mariasql = require('mariasql'),
+  bodyParser = require('body-parser'),
+  atob = require('atob'),
   server = express(),
   maria = new mariasql(),
-  port = process.env.PORT || 30000,
+  port = process.env.PORT || 3000,
   staticRoot = __dirname;
 
 
@@ -14,59 +14,79 @@ server.listen(port);
 
 console.log('connecting to maria');
 
-maria.connect({
-  host: 'localhost',
-  user: 'wmcrud',
-  password: 'wmcrud',
-  db: 'workout_metrics'
-});
+maria
+  .connect({
+    host: 'localhost',
+    user: 'wmcrud',
+    password: 'wmcrud',
+    db: 'workout_metrics'
+  })
+;
 
-maria.on('connect', function() {
- console.log('connected to maria');
-}).on('error', function(e) {
- console.log('error: maria: ' + e);
-}).on('close', function(c) {
- console.log('warning: maria: closed: ' + c);
-});
+maria
+  .on('connect', function() {
+   console.log('connected to maria');
+  }).on('error', function(e) {
+   console.log('error: maria: ' + e);
+  }).on('close', function(c) {
+   console.log('warning: maria: closed: ' + c);
+  })
+;
 
 console.log('server up on port '+port);
 
 server.get('/workouts',function(q,r){
-
+  resolveQueryAndRequest('select * from workouts',r);
 });
 
 server.get('/workouts/:wid',function(q,r){
-
+  var wid = q.params.wid;
+  resolveQueryAndRequest('select * from workouts where wid = '+wid,r);
 });
 
 server.post('/workouts',function(q,r){
 
 });
 
-server.get('/workouts/:wid/sets',function(q,r){
-
-});
-
-server.get('/workouts/:wid/sets/names',function(q,r){
-
-});
-
 server.get('/sets',function(q,r){
-
+  resolveQueryAndRequest('select * from sets',r);
 });
 
-server.get('/sets/:wid',function(q,r){
-
+server.get('/sets/:sid',function(q,r){
+  var sid = q.params.sid;
+  resolveQueryAndRequest('select * from sets where sid = '+sid,r);
 });
 
 server.post('/sets',function(q,r){
 
 });
 
-server.get('/sets/:wid',function(q,r){
-
-});
-
-server.get('/sets/names/:name',function(q,r){
-
-});
+function resolveQueryAndRequest (q,r) {
+  var results = [];
+  maria
+    .query(q)
+    .on('result',onResultHandler)
+    .on('end',onEndHandler)
+  ;
+  function onResultHandler (result) {
+    result
+      .on('row',onRowHandler)
+      .on('error',onErrorHandler)
+      .on('end',onEndHandler)
+    ;
+    function onRowHandler (row) {
+    	console.log(row);
+	results.push(row);
+    }
+    function onErrorHandler (error) {
+    	console.log(error);
+    }
+    function onEndHandler (end) {
+    	console.log(end);
+    }
+  }
+  function onEndHandler (end) {
+  	console.log(end);
+	r.send(results);
+  }
+}

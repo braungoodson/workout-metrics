@@ -43,7 +43,7 @@
 						<span class="glyphicon glyphicon-search"></span>
 					</button>
 				</span>
-				<input type="text" class="form-control" placeholder="Anaerbolic" ng-model="query" name="workoutType" required>
+				<input type="text" class="form-control" placeholder="Flat Bench Press" ng-model="query" name="setName" required>
 			</div>
 			
 		</form>
@@ -56,9 +56,9 @@
 			<th>X</th>
 		</tr>
 		<tr ng-repeat="s in sets | filter:query">
-			<td>{{s.name}}</td>
-			<td>{{s.weight}}</td>
-			<td>{{s.X}}</td>
+			<td>{{s.sname}}</td>
+			<td>{{s.sweight}}</td>
+			<td>{{s.sx}}</td>
 		</tr>
 	</table>
 

@@ -1,7 +1,5 @@
 -- workout-metrics database creation
 
-create user 'wmcrud'@'localhost' identified by 'wmcrud';
-
 create database if not exists workout_metrics;
 
 connect workout_metrics;
