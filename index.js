@@ -164,7 +164,7 @@ function SetsReadController ($scope,$http,SetsService) {
 }
 
 function SetsMetricsController ($scope,$http,SetsService) {
-		$scope.sets = [];
+	$scope.sets = [];
 	SetsService
 		.getSets()
 		.then(onResolve,onReject,onNotify)
