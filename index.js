@@ -50,7 +50,7 @@ function WorkoutsMetricsController ($scope,$http,WorkoutsService) {
 		throw new Error(rejection);
 	}
 	function onResolve (resolution) {
-		$scope.workouts = resolution.workouts;
+		$scope.workouts = resolution;
 	}
 }
 
@@ -67,7 +67,7 @@ function WorkoutsReadController ($scope,$http,WorkoutsService) {
 		throw new Error(rejection);
 	}
 	function onResolve (resolution) {
-		$scope.workouts = resolution.workouts;
+		$scope.workouts = resolution;
 	}
 }
 
