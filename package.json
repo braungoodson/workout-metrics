@@ -27,6 +27,9 @@
     "karma-coverage": "~0.2.4",
     "karma-mocha-reporter": "~0.2.5",
     "karma-junit-reporter": "~0.2.2",
-    "protractor": "~0.24.0"
+    "protractor": "~0.24.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-cli": "~0.1.13",
+    "grunt-protractor-runner": "~1.0.0"
   }
 }

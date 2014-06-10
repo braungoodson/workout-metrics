@@ -1,5 +1,8 @@
 exports.config = {
 
+  //
+  //seleniumServerJar: 'node_modules/protractor/selenium/selenium-server-standalone-2.42.0.jar'
+  seleniumServer: 'http://localhost:4444/wd/hub',
 
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
@@ -14,7 +17,6 @@ exports.config = {
   // Options to be passed to Jasmine-node.
   jasmineNodeOpts: {
     showColors: true, // Use colors in the command line report.
-  },
+  }
 
-  seleniumServerJar: '/Users/braun/Desktop/workout-metrics/node_modules/protractor/selenium/selenium-server-standalone-2.42.0.jar'
 };
