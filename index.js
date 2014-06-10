@@ -7,7 +7,7 @@ app.controller('WorkoutsCreateController',['$scope','$http','$location',Workouts
 app.controller('WorkoutsReadController',['$scope','$http','WorkoutsService',WorkoutsReadController]);
 app.controller('WorkoutsMetricsController',['$scope','$http','WorkoutsService',WorkoutsMetricsController]);
 app.controller('SetsCreateController',['$scope','$location','$http',SetsCreateController]);
-app.controller('SetsReadController',['$scope','$http',SetsReadController]);
+app.controller('SetsReadController',['$scope','$http','SetsService',SetsReadController]);
 app.controller('SetsMetricsController',['$scope','$http','SetsService',SetsMetricsController]);
 
 function Router ($routeProvider) {
@@ -146,24 +146,12 @@ function SetsCreateController ($scope,$location,$http) {
 	}
 }
 
-function SetsReadController ($scope,$http) {
-	$scope.busy = false;
+function SetsReadController ($scope,$http,SetsService) {
 	$scope.sets = [];
-	$scope.busy = true;
-	$http.get('/sets').success(function(data){
-		$scope.sets = data.sets;
-		$scope.busy = false;
-	}).error(function(){
-		throw new Error(arguments);
-	});
-}
-
-function SetsMetricsController ($scope,$http,SetsService) {
-	$scope.busy = false;
-	$scope.sets = [];
-	$scope.busy = true;
-	var setsPromise = SetsService.getSets();
-	setsPromise.then(onResolve,onReject,onNotify);
+	SetsService
+		.getSets()
+		.then(onResolve,onReject,onNotify)
+	;
 	function onNotify (notification) {
 		console.log('n',notification);
 	}
@@ -171,53 +159,23 @@ function SetsMetricsController ($scope,$http,SetsService) {
 		throw new Error(rejection);
 	}
 	function onResolve (resolution) {
-		var data1 = [], labels = [];
-		$scope.sets = resolution.sets;
-		var s = $scope.sets;
-		for (var i in s) { console.log('for i in s')
-			if (labelIsUnique(s[i].name)) { console.log('l is unique')
-				labels.push(s[i].name); console.log('push l')
-			}
-		}
-		function labelIsUnique (l) { console.log('l unique ?')
-			for (var i in labels) { console.log('for i in lbs')
-				if (labels[i] == l) { console.log('l !unique')
-					return false;
-				}
-			}
-			return true;
-		}
-		var xx = [];
-		for (var i in labels) {
-			for (var j in s) {
-				if (labels[i] == s[i].name) {
-					if (labelExists(labels[i])) {
-						
-					}
-				}
-			}
-		}
-		data1 = [65,59,90,81];
-		var data = {
-			labels : labels,
-			datasets : [
-				{
-					fillColor : "rgba(220,220,220,0.5)",
-					strokeColor : "rgba(220,220,220,1)",
-					pointColor : "rgba(220,220,220,1)",
-					pointStrokeColor : "#fff",
-					data : data1
-				},{
-					fillColor : "rgba(151,187,205,0.5)",
-					strokeColor : "rgba(151,187,205,1)",
-					pointColor : "rgba(151,187,205,1)",
-					pointStrokeColor : "#fff",
-					data : [28,48,40,19]
-				}
-			]
-		};
-		var ctx = document.getElementById("sets-metrics-spline").getContext("2d");
-		new Chart(ctx).Radar(data,{scaleSteps:4});
+		$scope.sets = resolution;
 	}
-	console.log('end');
+}
+
+function SetsMetricsController ($scope,$http,SetsService) {
+		$scope.sets = [];
+	SetsService
+		.getSets()
+		.then(onResolve,onReject,onNotify)
+	;
+	function onNotify (notification) {
+		console.log('n',notification);
+	}
+	function onReject (rejection) {
+		throw new Error(rejection);
+	}
+	function onResolve (resolution) {
+		$scope.sets = resolution;
+	}
 }
