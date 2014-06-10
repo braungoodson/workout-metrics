@@ -7,7 +7,7 @@ describe('Workout Metrics',function(){
 		element
 			.all(by.repeater('w in workouts'))
 			.then(function(workouts){
-				expect(workouts.count()).toBe(true);
+				expect(workouts.length > 0).toBe(true);
 			})
 		;
 	});
