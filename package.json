@@ -27,6 +27,6 @@
     "karma-coverage": "~0.2.4",
     "karma-mocha-reporter": "~0.2.5",
     "karma-junit-reporter": "~0.2.2",
-    "protractor": "~0.24.1"
+    "protractor": "~0.24.0"
   }
 }
