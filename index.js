@@ -39,6 +39,10 @@ function WorkoutsService ($q,$http) {
 function WorkoutsMetricsController ($scope,$http,WorkoutsService) {
 	$scope.workouts = [];
 	$scope.sets = [];
+	$scope.data = {
+		labels: [],
+		dataSets: []
+	};
 	WorkoutsService
 		.getWorkouts()
 		.then(onResolve,onReject,onNotify)
@@ -51,6 +55,13 @@ function WorkoutsMetricsController ($scope,$http,WorkoutsService) {
 	}
 	function onResolve (resolution) {
 		$scope.workouts = resolution;
+		var w = $scope.workouts;
+		var l = $scope.data.labels;
+		for (var i in w) {
+			l.push(w[i]);
+		}
+		var ctx = document.getElementById("workout-metrics-spline").getContext("2d");
+		var myNewChart = new Chart(ctx).Line($scope.data);
 	}
 }
 
