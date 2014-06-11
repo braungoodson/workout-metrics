@@ -49,7 +49,7 @@ function WorkoutsMetricsController ($scope,$filter,WorkoutsService) {
 		.then(onResolve,onReject,onNotify)
 	;
 	$scope.$watch('query',function(nvalue,ovalue){
-
+		if ($scope.initialized) {
 			var workouts = $filter('filter')($scope.workouts,$scope.query);
 			var w = workouts;
 			$scope.data.labels = [];
@@ -60,7 +60,9 @@ function WorkoutsMetricsController ($scope,$filter,WorkoutsService) {
 			}
 			var ctx = document.getElementById("workout-metrics-spline").getContext("2d");
 			var myNewChart = new Chart(ctx).Line($scope.data);
-
+		} else {
+			$scope.initialized = true;
+		}
 	});
 	function onNotify (notification) {
 		console.log('n',notification);
