@@ -33,20 +33,34 @@ function WorkoutsService ($q,$http) {
 		});
 		return deferred.promise;
 	}
+	s.getMetrics = function () {
+		var deferred = $.defer();
+		deferred.notify('GET /workouts/metrics/spline');
+		$http
+			.get('/workouts/metrics/spline')
+			.success(function(data){ deferred.resolve(data); })
+			.error(function(e){ deferred.reject(e); })
+		;
+		return deferred.promise;
+	}
 	return s;
 }
 
 function WorkoutsMetricsController ($scope,$filter,WorkoutsService) {
 
 	$scope.workouts = [];
-	$scope.sets = [];
+	$scope.metrics = [];
 	$scope.data = {
 		labels: [],
 		datasets: []
 	};
 	WorkoutsService
 		.getWorkouts()
-		.then(onResolve,onReject,onNotify)
+		.then(onResolve_workouts,onReject,onNotify)
+	;
+	WorkoutsService
+		.getMetrics()
+		.then(onResolve_metrics,onReject,onNotify)
 	;
 	$scope.$watch('query',function(nvalue,ovalue){
 		if ($scope.initialized) {
@@ -72,7 +86,55 @@ function WorkoutsMetricsController ($scope,$filter,WorkoutsService) {
 	function onReject (rejection) {
 		throw new Error(rejection);
 	}
-	function onResolve (resolution) {
+	function onResolve_metrics (resolution) {
+		$scope.metrics = resolution;
+		var m = $scope.metrics;
+		var d = $scope.data.datasets;
+		var init = false;
+		var existance = false;
+		for (var i in m) {
+			init = true;
+			existance = false;
+			for (var j in d) {
+				if (d[j].sname == m[i].sname) {
+					d[j].data[m[i].wid] = m[i].maxSetRep;
+					existance = true;
+				}
+			}
+			if (!existance) {
+				d.push({
+					sname: m[i].sname,
+					fillColor : "rgba(220,220,220,0.0)",
+					strokeColor : "rgba(220,220,220,1)",
+					pointColor : "rgba(220,220,220,1)",
+					pointStrokeColor : "#fff",
+					data : []
+				});
+				d[0].data[m[i].wid] = m[i].maxSetRep;
+			}
+			if (!init) {
+				d.push({
+					sname: m[i].sname,
+					fillColor : "rgba(220,220,220,0.0)",
+					strokeColor : "rgba(220,220,220,1)",
+					pointColor : "rgba(220,220,220,1)",
+					pointStrokeColor : "#fff",
+					data : []
+				});
+				d[0].data[m[i].wid] = m[i].maxSetRep;
+			}
+		}
+		$scope.data.datasets.push({
+			fillColor : "rgba(220,220,220,0.5)",
+			strokeColor : "rgba(220,220,220,1)",
+			pointColor : "rgba(220,220,220,1)",
+			pointStrokeColor : "#fff",
+			data : [65,59,90,81,56,55,40]
+		})
+		var ctx = document.getElementById("workout-metrics-spline").getContext("2d");
+		var myNewChart = new Chart(ctx).Line($scope.data);
+	}
+	function onResolve_workouts (resolution) {
 		$scope.workouts = resolution;
 		var w = $scope.workouts;
 		var l = $scope.data.labels;
