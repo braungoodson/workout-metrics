@@ -5,7 +5,7 @@ app.service('WorkoutsService',['$q','$http',WorkoutsService]);
 app.service('SetsService',['$q','$http',SetsService]);
 app.controller('WorkoutsCreateController',['$scope','$http','$location',WorkoutsCreateController]);
 app.controller('WorkoutsReadController',['$scope','$http','WorkoutsService',WorkoutsReadController]);
-app.controller('WorkoutsMetricsController',['$scope','$http','WorkoutsService',WorkoutsMetricsController]);
+app.controller('WorkoutsMetricsController',['$scope','$filter','WorkoutsService',WorkoutsMetricsController]);
 app.controller('SetsCreateController',['$scope','$location','$http',SetsCreateController]);
 app.controller('SetsReadController',['$scope','$http','SetsService',SetsReadController]);
 app.controller('SetsMetricsController',['$scope','$http','SetsService',SetsMetricsController]);
@@ -36,7 +36,7 @@ function WorkoutsService ($q,$http) {
 	return s;
 }
 
-function WorkoutsMetricsController ($scope,$http,WorkoutsService) {
+function WorkoutsMetricsController ($scope,$filter,WorkoutsService) {
 	$scope.workouts = [];
 	$scope.sets = [];
 	$scope.data = {
@@ -48,7 +48,7 @@ function WorkoutsMetricsController ($scope,$http,WorkoutsService) {
 		.then(onResolve,onReject,onNotify)
 	;
 	$scope.$watch('query',function(nvalue,ovalue){
-		console.log('ok',nvalue,ovalue)
+		console.log($filter('filter')($scope.workouts,$scope.query));
 	});
 	function onNotify (notification) {
 		console.log('n',notification);
