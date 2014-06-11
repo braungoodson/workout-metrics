@@ -12,8 +12,9 @@ insert into workouts (wid,wtype,wstart,wend) values (3,'Anaerbolic','2014/05/17 
 
 insert into workouts (wid,wtype,wstart,wend) values (4,'Anaerbolic','2014/05/19 10:00:00','2014/05/19 11:00:00');
 
-insert into workouts (wid,wtype,wstart,wend) values (4,'Anaerbolic','2014/05/21 10:00:00','2014/05/21 11:00:00');
+insert into workouts (wid,wtype,wstart,wend) values (5,'Anaerbolic','2014/05/21 10:00:00','2014/05/21 11:00:00');
 
+insert into workouts (wid,wtype,wstart,wend) values (6,'Anaerbolic','2014/05/23 10:00:00','2014/05/23 11:00:00');
 
 insert into sets (sname,sweight,sx,wid) values ('Flat Bench Press',225,12,1);
 insert into sets (sname,sweight,sx,wid) values ('Flat Bench Press',245,10,1);
@@ -63,3 +64,28 @@ insert into sets (sname,sweight,sx,wid) values ('Military Press',215,10,4);
 insert into sets (sname,sweight,sx,wid) values ('Military Press',205,4,4);
 insert into sets (sname,sweight,sx,wid) values ('Military Press',205,4,4);
 insert into sets (sname,sweight,sx,wid) values ('Military Press',210,4,4);
+
+
+insert into sets (sname,sweight,sx,wid) values ('Flat Bench Press',265,12,5);
+insert into sets (sname,sweight,sx,wid) values ('Flat Bench Press',295,10,5);
+insert into sets (sname,sweight,sx,wid) values ('Flat Bench Press',315,8,5);
+insert into sets (sname,sweight,sx,wid) values ('Flat Bench Press',335,6,5);
+insert into sets (sname,sweight,sx,wid) values ('Flat Bench Press',400,4,5);
+
+insert into sets (sname,sweight,sx,wid) values ('Lateral Pulldowns',245,12,5);
+insert into sets (sname,sweight,sx,wid) values ('Lateral Pulldowns',265,10,5);
+insert into sets (sname,sweight,sx,wid) values ('Lateral Pulldowns',305,8,5);
+insert into sets (sname,sweight,sx,wid) values ('Lateral Pulldowns',325,6,5);
+insert into sets (sname,sweight,sx,wid) values ('Lateral Pulldowns',375,4,5);
+
+insert into sets (sname,sweight,sx,wid) values ('Squats',350,12,6);
+insert into sets (sname,sweight,sx,wid) values ('Squats',390,10,6);
+insert into sets (sname,sweight,sx,wid) values ('Squats',430,8,6);
+insert into sets (sname,sweight,sx,wid) values ('Squats',450,6,6);
+insert into sets (sname,sweight,sx,wid) values ('Squats',480,4,6);
+
+insert into sets (sname,sweight,sx,wid) values ('Military Press',225,12,6);
+insert into sets (sname,sweight,sx,wid) values ('Military Press',255,10,6);
+insert into sets (sname,sweight,sx,wid) values ('Military Press',295,4,6);
+insert into sets (sname,sweight,sx,wid) values ('Military Press',315,4,6);
+insert into sets (sname,sweight,sx,wid) values ('Military Press',350,4,6);
