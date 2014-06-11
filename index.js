@@ -34,7 +34,7 @@ function WorkoutsService ($q,$http) {
 		return deferred.promise;
 	}
 	s.getMetrics = function () {
-		var deferred = $.defer();
+		var deferred = $q.defer();
 		deferred.notify('GET /workouts/metrics/spline');
 		$http
 			.get('/workouts/metrics/spline')
