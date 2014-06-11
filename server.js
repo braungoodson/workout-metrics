@@ -8,6 +8,7 @@ var express = require('express'),
   staticRoot = __dirname;
 
 server.use(bodyParser());
+server.use(CORSOverride);
 server.use('/', express.static(staticRoot));
 server.listen(port);
 
@@ -88,4 +89,11 @@ function resolveQueryAndRequest (q,r) {
   	console.log(end);
 	r.send(results);
   }
+}
+
+var CORSOverride = function(q,r,next) {
+  r.header('Access-Control-Allow-Origin', '*');
+  r.header('Access-Control-Allow-Methods', 'GET');
+  //r.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
 }
