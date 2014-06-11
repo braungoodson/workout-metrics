@@ -97,7 +97,7 @@ function WorkoutsMetricsController ($scope,$filter,WorkoutsService) {
 			existance = false;
 			for (var j in d) {
 				if (d[j].sname == m[i].sname) {
-					d[j].data[m[i].wid] = parseInt(m[i].maxSetRep);
+					d[j].data[parseInt(m[i].wid)] = parseInt(m[i].maxSetRep);
 					existance = true;
 				}
 			}
