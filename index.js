@@ -104,7 +104,7 @@ function WorkoutsMetricsController ($scope,$filter,WorkoutsService) {
 			if (!existance) {
 				d.push({
 					sname: m[i].sname,
-					fillColor : "rgba(220,220,220,0.0)",
+					fillColor : "rgba(220,220,220,0.5)",
 					strokeColor : "rgba(220,220,220,1)",
 					pointColor : "rgba(220,220,220,1)",
 					pointStrokeColor : "#fff",
@@ -115,7 +115,7 @@ function WorkoutsMetricsController ($scope,$filter,WorkoutsService) {
 			if (!init) {
 				d.push({
 					sname: m[i].sname,
-					fillColor : "rgba(220,220,220,0.0)",
+					fillColor : "rgba(220,220,220,0.5)",
 					strokeColor : "rgba(220,220,220,1)",
 					pointColor : "rgba(220,220,220,1)",
 					pointStrokeColor : "#fff",
