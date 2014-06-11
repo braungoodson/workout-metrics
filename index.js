@@ -110,7 +110,7 @@ function WorkoutsMetricsController ($scope,$filter,WorkoutsService) {
 					pointStrokeColor : "#fff",
 					data : []
 				});
-				d[0].data[m[i].wid] = m[i].maxSetRep;
+				d[0].data[parseInt(m[i].wid)] = parseInt(m[i].maxSetRep);
 			}
 			if (!init) {
 				d.push({
@@ -121,7 +121,7 @@ function WorkoutsMetricsController ($scope,$filter,WorkoutsService) {
 					pointStrokeColor : "#fff",
 					data : []
 				});
-				d[0].data[m[i].wid] = m[i].maxSetRep;
+				d[0].data[parseInt(m[i].wid)] = parseInt(m[i].maxSetRep);
 			}
 		}
 		$scope.data.datasets.push({
