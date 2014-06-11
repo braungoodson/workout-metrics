@@ -51,11 +51,13 @@ function WorkoutsMetricsController ($scope,$filter,WorkoutsService) {
 	$scope.$watch('query',function(nvalue,ovalue){
 		if ($scope.initialized) {
 			var workouts = $filter('filter')($scope.workouts,$scope.query);
+			console.log(workouts);
 			var w = workouts;
 			$scope.data.labels = [];
 			$scope.data.datasets = [];
 			var l = $scope.data.labels;
 			for (var i in w) {
+				console.log(w[i].wstart)
 				l.push(w[i].wstart);
 			}
 			var ctx = document.getElementById("workout-metrics-spline").getContext("2d");

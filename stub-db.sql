@@ -6,11 +6,13 @@ connect workout_metrics;
 
 insert into workouts (wid,wtype,wstart,wend) values (1,'Anaerbolic','2014/05/13 10:00:00','2014/05/13 11:00:00');
 
-insert into workouts (wid,wtype,wstart,wend) values (2,'Anaerbolic','2014/05/15 10:00:00','2014/05/13 11:00:00');
+insert into workouts (wid,wtype,wstart,wend) values (2,'Anaerbolic','2014/05/15 10:00:00','2014/05/15 11:00:00');
 
-insert into workouts (wid,wtype,wstart,wend) values (3,'Anaerbolic','2014/05/17 10:00:00','2014/05/13 11:00:00');
+insert into workouts (wid,wtype,wstart,wend) values (3,'Anaerbolic','2014/05/17 10:00:00','2014/05/17 11:00:00');
 
-insert into workouts (wid,wtype,wstart,wend) values (4,'Anaerbolic','2014/05/19 10:00:00','2014/05/13 11:00:00');
+insert into workouts (wid,wtype,wstart,wend) values (4,'Anaerbolic','2014/05/19 10:00:00','2014/05/19 11:00:00');
+
+insert into workouts (wid,wtype,wstart,wend) values (4,'Anaerbolic','2014/05/21 10:00:00','2014/05/21 11:00:00');
 
 
 insert into sets (sname,sweight,sx,wid) values ('Flat Bench Press',225,12,1);
