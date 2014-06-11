@@ -48,13 +48,7 @@ function WorkoutsMetricsController ($scope,$http,WorkoutsService) {
 		.then(onResolve,onReject,onNotify)
 	;
 	$scope.$watch('workouts',function(){
-		$scope.data.labels = [];
-		var l = $scope.data.labels;
-		for (var i in w) {
-			l.push(w[i].wstart);
-		}
-		var ctx = document.getElementById("workout-metrics-spline").getContext("2d");
-		var myNewChart = new Chart(ctx).Line($scope.data);
+		console.log('ok')
 	});
 	function onNotify (notification) {
 		console.log('n',notification);
