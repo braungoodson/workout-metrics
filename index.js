@@ -41,7 +41,7 @@ function WorkoutsMetricsController ($scope,$http,WorkoutsService) {
 	$scope.sets = [];
 	$scope.data = {
 		labels: [],
-		dataSets: []
+		dataSets: [{}]
 	};
 	WorkoutsService
 		.getWorkouts()
