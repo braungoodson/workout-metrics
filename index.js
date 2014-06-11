@@ -124,13 +124,6 @@ function WorkoutsMetricsController ($scope,$filter,WorkoutsService) {
 				d[0].data[parseInt(m[i].wid)] = parseInt(m[i].maxSetRep);
 			}
 		}
-		$scope.data.datasets.push({
-			fillColor : "rgba(220,220,220,0.5)",
-			strokeColor : "rgba(220,220,220,1)",
-			pointColor : "rgba(220,220,220,1)",
-			pointStrokeColor : "#fff",
-			data : [65,59,90,81,56,55,40]
-		})
 		var ctx = document.getElementById("workout-metrics-spline").getContext("2d");
 		var myNewChart = new Chart(ctx).Line($scope.data);
 	}
