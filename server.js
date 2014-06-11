@@ -43,7 +43,7 @@ server.get('/workouts/:wid',function(q,r){
   resolveQueryAndRequest('select * from workouts where wid = '+wid,r);
 });
 
-server.post('/workouts/metrics/spline',function(q,r){
+server.get('/workouts/metrics/spline',function(q,r){
   resolveQueryAndRequest('select a.sid, a.sname, a.wid, max(a.sweight) as maxSetRep from sets a, workouts b where a.wid = b.wid and a.wid group by sname, wid order by sweight asc',r);
 });
 
