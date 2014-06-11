@@ -37,6 +37,7 @@ function WorkoutsService ($q,$http) {
 }
 
 function WorkoutsMetricsController ($scope,$filter,WorkoutsService) {
+
 	$scope.workouts = [];
 	$scope.sets = [];
 	$scope.data = {
@@ -48,14 +49,18 @@ function WorkoutsMetricsController ($scope,$filter,WorkoutsService) {
 		.then(onResolve,onReject,onNotify)
 	;
 	$scope.$watch('query',function(nvalue,ovalue){
-		var workouts = $filter('filter')($scope.workouts,$scope.query);
-		var w = workouts;
-		$scope.data.labels = [];
-		var l = $scope.data.labels;
-		for (var i in w) {
-			l.push(w[i].wstart);
-		}
-		
+
+			var workouts = $filter('filter')($scope.workouts,$scope.query);
+			var w = workouts;
+			$scope.data.labels = [];
+			$scope.data.datasets = [];
+			var l = $scope.data.labels;
+			for (var i in w) {
+				l.push(w[i].wstart);
+			}
+			var ctx = document.getElementById("workout-metrics-spline").getContext("2d");
+			var myNewChart = new Chart(ctx).Line($scope.data);
+
 	});
 	function onNotify (notification) {
 		console.log('n',notification);
