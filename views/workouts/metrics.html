@@ -48,7 +48,7 @@
 			<th>Start</th>
 			<th>End</th>
 		</tr>
-		<tr ng-repeat="w in (workoutsQuery = (workouts | filter:query))">
+		<tr ng-repeat="w in workouts | filter:query">
 			<td>{{w.wtype}}</td>
 			<td>{{w.wstart}}</td>
 			<td>{{w.wend}}</td>
