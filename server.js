@@ -8,7 +8,6 @@ var express = require('express'),
   staticRoot = __dirname;
 
 server.use(bodyParser());
-server.use(CORSOverride);
 server.use('/', express.static(staticRoot));
 server.listen(port);
 
@@ -36,15 +35,21 @@ maria
 console.log('server up on port '+port);
 
 server.get('/workouts',function(q,r){
+  r.header('Access-Control-Allow-Origin', '*');
+  r.header('Access-Control-Allow-Methods', 'GET');
   resolveQueryAndRequest('select * from workouts',r);
 });
 
 server.get('/workouts/:wid',function(q,r){
   var wid = q.params.wid;
+  r.header('Access-Control-Allow-Origin', '*');
+  r.header('Access-Control-Allow-Methods', 'GET');
   resolveQueryAndRequest('select * from workouts where wid = '+wid,r);
 });
 
 server.get('/workouts/metrics/spline',function(q,r){
+  r.header('Access-Control-Allow-Origin', '*');
+  r.header('Access-Control-Allow-Methods', 'GET');
   resolveQueryAndRequest('select a.sid, a.sname, a.wid, max(a.sweight) as maxSetRep from sets a, workouts b where a.wid = b.wid and a.wid group by sname, wid order by sweight asc',r);
 });
 
@@ -89,11 +94,4 @@ function resolveQueryAndRequest (q,r) {
   	console.log(end);
 	r.send(results);
   }
-}
-
-var CORSOverride = function(q,r,next) {
-  r.header('Access-Control-Allow-Origin', '*');
-  r.header('Access-Control-Allow-Methods', 'GET');
-  //r.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
 }
