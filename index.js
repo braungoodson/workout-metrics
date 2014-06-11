@@ -47,6 +47,10 @@ function WorkoutsMetricsController ($scope,$http,WorkoutsService) {
 		.getWorkouts()
 		.then(onResolve,onReject,onNotify)
 	;
+	$scope.$watch('data',function(newValue,oldValue){
+		var ctx = document.getElementById("workout-metrics-spline").getContext("2d");
+		var myNewChart = new Chart(ctx).Line(newValue);
+	});
 	function onNotify (notification) {
 		console.log('n',notification);
 	}
@@ -60,8 +64,6 @@ function WorkoutsMetricsController ($scope,$http,WorkoutsService) {
 		for (var i in w) {
 			l.push(w[i].wstart);
 		}
-		var ctx = document.getElementById("workout-metrics-spline").getContext("2d");
-		var myNewChart = new Chart(ctx).Line($scope.data);
 	}
 }
 
