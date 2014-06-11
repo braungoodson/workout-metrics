@@ -47,7 +47,7 @@ function WorkoutsMetricsController ($scope,$http,WorkoutsService) {
 		.getWorkouts()
 		.then(onResolve,onReject,onNotify)
 	;
-	$scope.$watch('query',function(nvalue,ovalue){
+	$scope.$watch('workoutsQuery',function(nvalue,ovalue){
 		console.log('ok',nvalue,ovalue)
 	});
 	function onNotify (notification) {
