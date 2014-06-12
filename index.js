@@ -135,7 +135,7 @@ function WorkoutsMetricsController ($scope,$filter,WorkoutsService) {
 			l.push(w[i].wstart);
 		}
 		$scope.data.datasets.push({
-			fillColor : "rgba(220,220,220,0.5)",
+			fillColor : "red",
 			strokeColor : "rgba(220,220,220,1)",
 			pointColor : "rgba(220,220,220,1)",
 			pointStrokeColor : "#fff",
