@@ -30,6 +30,7 @@
     "protractor": "~0.24.0",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-cli": "~0.1.13",
-    "grunt-protractor-runner": "~1.0.0"
+    "grunt-protractor-runner": "~1.0.0",
+    "robohydra": "~0.4.0"
   }
 }
