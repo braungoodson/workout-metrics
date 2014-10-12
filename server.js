@@ -51,6 +51,10 @@ server.get('/sets',function(q,r){
   resolveQueryAndRequest('select * from sets',r);
 });
 
+server.get('/sets/metrics/linear',function(q,r){
+	resolveQueryAndRequest('select a.wstart, b.* from workouts a, sets b where a.wid = b.wid',r);
+});
+
 server.get('/sets/:sid',function(q,r){
   var sid = q.params.sid;
   resolveQueryAndRequest('select * from sets where sid = '+sid,r);

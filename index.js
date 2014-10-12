@@ -197,6 +197,16 @@ function SetsService ($q,$http) {
 		});
 		return deferred.promise;
 	}
+	s.getSetsMetricsLinear = function () {
+		var deferred = $q.defer();
+		deferred.notify('GET /sets/metrics/linear');
+		$http.get('/sets/metrics/linear').success(function(data){
+			deferred.resolve(data);
+		}).error(function(e){
+			deferred.reject(e);
+		});
+		return deferred.promise;
+	}
 	return s;
 }
 
@@ -258,7 +268,7 @@ function SetsReadController ($scope,$http,SetsService) {
 function SetsMetricsController ($scope,$http,SetsService) {
 	$scope.sets = [];
 	SetsService
-		.getSets()
+		.getSetsMetricsLinear()
 		.then(onResolve,onReject,onNotify)
 	;
 	function onNotify (notification) {
@@ -268,6 +278,6 @@ function SetsMetricsController ($scope,$http,SetsService) {
 		throw new Error(rejection);
 	}
 	function onResolve (resolution) {
-		$scope.sets = resolution;
+		$scope.setsMetricsLinear = resolution;
 	}
 }

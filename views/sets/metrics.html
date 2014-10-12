@@ -51,11 +51,13 @@
 
 	<table class="table">
 		<tr>
+			<th>Date</th>
 			<th>Name</th>
 			<th>lbs/kgs</th>
 			<th>X</th>
 		</tr>
-		<tr ng-repeat="s in sets | filter:query">
+		<tr ng-repeat="s in setsMetricsLinear | filter:query">
+			<td>{{s.wstart}}</td>
 			<td>{{s.sname}}</td>
 			<td>{{s.sweight}}</td>
 			<td>{{s.sx}}</td>
