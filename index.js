@@ -279,5 +279,48 @@ function SetsMetricsController ($scope,$http,SetsService) {
 	}
 	function onResolve (resolution) {
 		$scope.setsMetricsLinear = resolution;
+		var canvas = document.getElementById('sets-metrics-spline');
+		var context = canvas.getContext('2d');
+		var chart = new Chart(context);
+		var data, options;
+		options = {};
+		data = {
+			labels: [],
+			datasets: []
+		};
+		var t = [], v = [];
+		var dates = [], setNames = [];
+		var sets = resolution;
+		sets.map(function(el,i,A){
+			var date =el.wstart.match(/([0-9]{2,4}(\/)*){3}/g)[0];
+			t[date] = date;
+			var setName = el.sname;
+			v[setName] = setName;
+			return el;
+		});
+		for (var i in t) {
+			dates.push(t[i]);
+		}
+		data.labels = dates;
+		for (var i in v) {
+			setNames.push(v[i]);
+		}
+		for (var j in setNames) {
+			t = [];
+			sets.map(function(el,i,A){
+				if (el.sname == setNames[j]) {
+					t.push(el.sweight);
+				}
+				return el;
+			});
+			data.datasets.push({
+				label: setNames[j],
+				fillColor: 'rgba(100,100,100,0)',
+				strokeColor: 'rgba(100,100,100,.5)',
+				data: t
+			});
+		}
+		console.log(data);
+		var lineChart = chart.Line(data,options);
 	}
 }
