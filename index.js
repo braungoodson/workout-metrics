@@ -279,6 +279,10 @@ function SetsMetricsController ($scope,$http,SetsService) {
 	}
 	function onResolve (resolution) {
 		$scope.setsMetricsLinear = resolution;
+		updateChart();
+	}
+	function updateChart(resolution) {
+		resolution = resolution || $scope.setsMetricsLinear;
 		var canvas = document.getElementById('sets-metrics-spline');
 		var context = canvas.getContext('2d');
 		var chart = new Chart(context);
@@ -320,7 +324,6 @@ function SetsMetricsController ($scope,$http,SetsService) {
 				data: t
 			});
 		}
-		console.log(data);
 		var lineChart = chart.Line(data,options);
 	}
 }
