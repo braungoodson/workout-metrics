@@ -11,11 +11,12 @@
   "author": "",
   "license": "BSD-2-Clause",
   "dependencies": {
+    "atob": "~1.1.2",
+    "body-parser": "~1.2.2",
     "bower": "~1.2.8",
     "express": "~4.2.0",
-    "body-parser": "~1.2.2",
-    "atob": "~1.1.2",
-    "mariasql": "~0.1.21"
+    "mariasql": "~0.1.21",
+    "scrubr": "0.0.7"
   },
   "devDependencies": {
     "karma-jasmine": "~0.1.5",

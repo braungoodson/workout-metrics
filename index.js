@@ -168,9 +168,9 @@ function WorkoutsCreateController ($scope,$http,$location) {
 	$scope.workout = {};
 	$scope.getNow = function (position) {
 		if (position == "start") {
-			$scope.workout.start = new Date();
+			$scope.workout.wstart = new Date();
 		} else {
-			$scope.workout.end = new Date();
+			$scope.workout.wend = new Date();
 		}
 	}
 	$scope.onSubmit = function () {

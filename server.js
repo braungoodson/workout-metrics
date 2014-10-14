@@ -47,6 +47,20 @@ server.get('/workouts/metrics/spline',function(q,r){
   resolveQueryAndRequest('select a.sid, a.sname, a.wid, max(a.sweight) as maxSetRep from sets a, workouts b where a.wid = b.wid and a.wid group by sname, wid order by sweight asc',r);
 });
 
+server.post('/workouts',function(q,r){
+	if (q.body.wtype.match(/[a-zA-Z]{2,16}/g) &&
+		q.body.wstart.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/g) &&
+		q.body.wend.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/g)) {
+	
+	resolveQueryAndRequest('insert into workouts (wtype,wstart,wend) '+
+		'values ("'+q.body.wtype+'","'+q.body.wstart+'","'+
+			q.body.wend+'")',r,q)
+	;
+	} else {
+		r.send({error:'dirty input'});
+	}
+});
+
 server.get('/sets',function(q,r){
   resolveQueryAndRequest('select * from sets',r);
 });
@@ -64,8 +78,8 @@ server.post('/sets',function(q,r){
 
 });
 
-function resolveQueryAndRequest (q,r) {
-  var results = [];
+function resolveQueryAndRequest (q,r,qt) {
+ var results = [];
   maria
     .query(q)
     .on('result',onResultHandler)
