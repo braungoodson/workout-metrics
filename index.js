@@ -175,6 +175,8 @@ function WorkoutsCreateController ($scope,$http,$location) {
 	}
 	$scope.onSubmit = function () {
 		$scope.busy = true;
+		$scope.workout.wstart = new Date($scope.workout.wstart);
+		$scope.workout.wend = new Date($scope.workout.wend);
 		$http.post('/workouts',$scope.workout).success(function(data){
 			$scope.busy = false;
 			$location.path('/sets/create');
