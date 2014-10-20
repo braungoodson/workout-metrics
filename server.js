@@ -52,11 +52,10 @@ server.post('/workouts',function(q,r){
 	var b = q.body.wtype.match(/[a-zA-Z]{2,16}/g) && true;
 	var c = q.body.wstart.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/g) && true;
 	var d = q.body.wend.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/g) && true;
-	console.log(a,b,c,d);
+	a = b && c && d;
 	if (a) {
-	
-	resolveQueryAndRequest('insert into workouts (wtype,wstart,wend) '+
-		'values ("'+q.body.wtype+'","'+q.body.wstart+'","'+
+		resolveQueryAndRequest('insert into workouts (wtype,wstart,wend) '+
+			'values ("'+q.body.wtype+'","'+q.body.wstart+'","'+
 			q.body.wend+'")',r,q)
 	;
 	} else {
