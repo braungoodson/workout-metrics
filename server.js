@@ -48,9 +48,12 @@ server.get('/workouts/metrics/spline',function(q,r){
 });
 
 server.post('/workouts',function(q,r){
-	if (q.body.wtype.match(/[a-zA-Z]{2,16}/g) &&
-		q.body.wstart.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/g) &&
-		q.body.wend.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/g)) {
+	var a = false;
+	var b = q.body.wtype.match(/[a-zA-Z]{2,16}/g) && true;
+	var c = q.body.wstart.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/g) && true;
+	var d = q.body.wend.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/g) && true;
+	console.log(a,b,c,d);
+	if (a) {
 	
 	resolveQueryAndRequest('insert into workouts (wtype,wstart,wend) '+
 		'values ("'+q.body.wtype+'","'+q.body.wstart+'","'+
