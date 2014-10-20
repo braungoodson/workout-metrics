@@ -50,8 +50,8 @@ server.get('/workouts/metrics/spline',function(q,r){
 server.post('/workouts',function(q,r){
 	var a = false;
 	var b = q.body.wtype.match(/[a-zA-Z]{2,16}/g) && true;
-	var c = q.body.wstart.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/g) && true;
-	var d = q.body.wend.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/g) && true;
+	var c = (q.body.wstart.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/g) || q.body.wstart.match(/[a-zA-z]{3}\s[a-zA-z]{3}\s[0-9]{2}\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\s[A-Z]{3}-[0-9]{4}\s\([A-Z]{3}\)/g)) && true;
+	var d = (q.body.wend.match(/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/g) || q.body.wend.match(/[a-zA-z]{3}\s[a-zA-z]{3}\s[0-9]{2}\s[0-9]{4}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\s[A-Z]{3}-[0-9]{4}\s\([A-Z]{3}\)/g)) && true;
 	a = b && c && d;
 	if (a) {
 		resolveQueryAndRequest('insert into workouts (wtype,wstart,wend) '+
